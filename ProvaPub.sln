@@ -3,9 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{96D28A43-8B42-4E63-98BC-E9DF76AB09CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{51BC5B23-CE4B-478D-B4C4-0D6F686CAE39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvaPub.Domain", "src\Domain\ProvaPub.Domain\ProvaPub.Domain.csproj", "{3A68F030-F64A-4886-BE5F-894D85446DD4}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A68F030-F64A-4886-BE5F-894D85446DD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A68F030-F64A-4886-BE5F-894D85446DD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A68F030-F64A-4886-BE5F-894D85446DD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A68F030-F64A-4886-BE5F-894D85446DD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{51BC5B23-CE4B-478D-B4C4-0D6F686CAE39} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{3A68F030-F64A-4886-BE5F-894D85446DD4} = {51BC5B23-CE4B-478D-B4C4-0D6F686CAE39}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {508154CE-59FC-48C4-A288-C3D88E9607FE}
