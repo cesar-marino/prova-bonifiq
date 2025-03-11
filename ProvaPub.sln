@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{CC359F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvaPub.Domain", "src\Domain\ProvaPub.Domain\ProvaPub.Domain.csproj", "{A9C17BE9-105D-48AD-B366-16EB90668092}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{A9BB3A61-FB47-4F1D-86C2-143ADD07E4EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvaPub.Application", "src\Application\ProvaPub.Application\ProvaPub.Application.csproj", "{6E4BF583-44F5-4DDE-8E73-20E167F25C32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,10 @@ Global
 		{A9C17BE9-105D-48AD-B366-16EB90668092}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9C17BE9-105D-48AD-B366-16EB90668092}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9C17BE9-105D-48AD-B366-16EB90668092}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E4BF583-44F5-4DDE-8E73-20E167F25C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E4BF583-44F5-4DDE-8E73-20E167F25C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E4BF583-44F5-4DDE-8E73-20E167F25C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E4BF583-44F5-4DDE-8E73-20E167F25C32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,6 +42,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{CC359FC3-27DC-4382-A738-948A759BBFA7} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{A9C17BE9-105D-48AD-B366-16EB90668092} = {CC359FC3-27DC-4382-A738-948A759BBFA7}
+		{A9BB3A61-FB47-4F1D-86C2-143ADD07E4EE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{6E4BF583-44F5-4DDE-8E73-20E167F25C32} = {A9BB3A61-FB47-4F1D-86C2-143ADD07E4EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {508154CE-59FC-48C4-A288-C3D88E9607FE}
