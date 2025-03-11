@@ -5,6 +5,12 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvaPub", "ProvaPub.csproj", "{BF0C6C17-A860-47B0-BF84-1FBB2E26742A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{291DCD16-81BE-4F2F-B723-3C4376F21AAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvaPub.Domain", "src\Domain\ProvaPub.Domain\ProvaPub.Domain.csproj", "{ED81B78E-99FC-4281-B3CC-A807CE812305}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +21,16 @@ Global
 		{BF0C6C17-A860-47B0-BF84-1FBB2E26742A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF0C6C17-A860-47B0-BF84-1FBB2E26742A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF0C6C17-A860-47B0-BF84-1FBB2E26742A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED81B78E-99FC-4281-B3CC-A807CE812305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED81B78E-99FC-4281-B3CC-A807CE812305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED81B78E-99FC-4281-B3CC-A807CE812305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED81B78E-99FC-4281-B3CC-A807CE812305}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED81B78E-99FC-4281-B3CC-A807CE812305} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {508154CE-59FC-48C4-A288-C3D88E9607FE}
