@@ -3,7 +3,7 @@ using ProvaPub.Application.UseCases.RandomNumber.Commons;
 
 namespace ProvaPub.Application.UseCases.RandomNumber.GenerateRandomNumber
 {
-    public interface IGenerateRandomNumberHandler : IRequestHandler<GenerateRandomNumberRequest, RandonNumberResponse>
+    public interface IGenerateRandomNumberHandler : IRequestHandler<GenerateRandomNumberRequest, RandomNumberResponse>
     {
     }
 }

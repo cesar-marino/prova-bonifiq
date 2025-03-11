@@ -1,6 +1,6 @@
 ﻿namespace ProvaPub.Application.UseCases.RandomNumber.Commons
 {
-    public class RandonNumberResponse(
+    public class RandomNumberResponse(
         Guid randonNumberId,
         int number)
     {
