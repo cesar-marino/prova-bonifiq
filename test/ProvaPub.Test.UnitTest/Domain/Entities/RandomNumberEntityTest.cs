@@ -2,13 +2,13 @@
 
 namespace ProvaPub.Test.UnitTest.Domain.Entities
 {
-    public class RandonNumberEntityTest
+    public class RandomNumberEntityTest
     {
         [Fact(DisplayName = nameof(ShouldGeneraterandonNumberOnCreateEntity))]
         [Trait("Unit/Entities", "RandonNumber")]
         public void ShouldGeneraterandonNumberOnCreateEntity()
         {
-            var randonNumber = new RandonNumberEntity();
+            var randonNumber = new RandomNumberEntity();
 
             Assert.NotEqual(0, randonNumber.Number);
         }

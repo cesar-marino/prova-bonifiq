@@ -2,11 +2,11 @@
 
 namespace ProvaPub.Domain.Entities
 {
-    public class RandonNumberEntity : EntityBase
+    public class RandomNumberEntity : EntityBase
     {
         public int Number { get; }
 
-        public RandonNumberEntity()
+        public RandomNumberEntity()
         {
             Number = GenerateRandonNumber();
         }
