@@ -22,8 +22,7 @@ namespace ProvaPub.Application.UseCases.RandomNumber.GenerateRandomNumber
 
             await randomNumberRepository.InsertAsync(randomNumber!, cancellationToken);
             await unitOfWork.CommitAsync(cancellationToken);
-
-            throw new NotImplementedException();
+            return RandomNumberResponse.FromEntity(randomNumber);
         }
     }
 }

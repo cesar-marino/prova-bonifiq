@@ -88,5 +88,21 @@ namespace ProvaPub.Test.UnitTest.Application.UseCases.RandomNumber.GenerateRando
             Assert.Equal("unexpected", exception.Code);
             Assert.Equal("An unexpected error occurred", exception.Message);
         }
+
+        [Fact(DisplayName = nameof(ShouldReturnTheCorrectResponseIfRandomNumberIsSuccessfullyGenerated))]
+        [Trait("Unit/UseCases", "RandomNumber - GeneraeteRandomNumber")]
+        public async Task ShouldReturnTheCorrectResponseIfRandomNumberIsSuccessfullyGenerated()
+        {
+            _randomNumberRepositoryMock
+                .Setup(x => x.CheckNumberAsync(
+                    It.IsAny<int>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(false);
+
+            var request = _fixture.MakeGenerateRandomNumberRequest();
+            var response = await _sut.Handle(request, _fixture.CancellationToken);
+
+            Assert.NotEqual(0, response.Number);
+        }
     }
 }
