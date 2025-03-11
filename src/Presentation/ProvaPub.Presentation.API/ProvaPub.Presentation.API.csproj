@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\ProvaPub.Application\ProvaPub.Application.csproj" />
+    <ProjectReference Include="..\..\Domain\ProvaPub.Domain\ProvaPub.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\ProvaPub.Infrastructure.Data\ProvaPub.Infrastructure.Data.csproj" />
   </ItemGroup>
 
 </Project>
