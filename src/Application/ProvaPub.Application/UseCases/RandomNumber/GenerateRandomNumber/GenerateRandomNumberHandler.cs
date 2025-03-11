@@ -1,10 +1,13 @@
 ﻿using ProvaPub.Application.UseCases.RandomNumber.Commons;
 using ProvaPub.Domain.Entities;
 using ProvaPub.Domain.Repositories;
+using ProvaPub.Domain.SeedWork;
 
 namespace ProvaPub.Application.UseCases.RandomNumber.GenerateRandomNumber
 {
-    public class GenerateRandomNumberHandler(IRandomNumberRepository randomNumberRepository) : IGenerateRandomNumberHandler
+    public class GenerateRandomNumberHandler(
+        IRandomNumberRepository randomNumberRepository,
+        IUnitOfWork unitOfWork) : IGenerateRandomNumberHandler
     {
         public async Task<RandomNumberResponse> Handle(GenerateRandomNumberRequest request, CancellationToken cancellationToken)
         {
@@ -18,6 +21,7 @@ namespace ProvaPub.Application.UseCases.RandomNumber.GenerateRandomNumber
             }
 
             await randomNumberRepository.InsertAsync(randomNumber!, cancellationToken);
+            await unitOfWork.CommitAsync(cancellationToken);
 
             throw new NotImplementedException();
         }
