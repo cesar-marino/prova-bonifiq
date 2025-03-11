@@ -15,6 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Application\ProvaPub.Application\ProvaPub.Application.csproj" />
+    <ProjectReference Include="..\..\src\Domain\ProvaPub.Domain\ProvaPub.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\ProvaPub.Infrastructure.Data\ProvaPub.Infrastructure.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 
