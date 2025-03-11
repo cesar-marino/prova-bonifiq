@@ -8,10 +8,10 @@ namespace ProvaPub.Domain.Entities
 
         public RandomNumberEntity()
         {
-            Number = GenerateRandonNumber();
+            Number = GenerateNumber();
         }
 
-        public int GenerateRandonNumber()
+        public int GenerateNumber()
         {
             var randon = new Random(Id.GetHashCode());
             return randon.Next();

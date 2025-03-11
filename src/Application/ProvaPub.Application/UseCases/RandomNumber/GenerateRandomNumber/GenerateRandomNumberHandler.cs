@@ -9,7 +9,15 @@ namespace ProvaPub.Application.UseCases.RandomNumber.GenerateRandomNumber
         public async Task<RandomNumberResponse> Handle(GenerateRandomNumberRequest request, CancellationToken cancellationToken)
         {
             var randomNumber = new RandomNumberEntity();
-            await randomNumberRepository.CheckNumberAsync(randomNumber.Number, cancellationToken);
+            var existNumber = await randomNumberRepository.CheckNumberAsync(randomNumber.Number, cancellationToken);
+
+            while (existNumber)
+            {
+                randomNumber.GenerateNumber();
+                existNumber = await randomNumberRepository.CheckNumberAsync(randomNumber.Number, cancellationToken);
+            }
+
+            await randomNumberRepository.InsertAsync(randomNumber!, cancellationToken);
 
             throw new NotImplementedException();
         }
