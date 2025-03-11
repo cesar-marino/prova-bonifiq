@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvaPub.Infrastructure.Data", "src\Infrastructure\ProvaPub.Infrastructure.Data\ProvaPub.Infrastructure.Data.csproj", "{4BE7DCC7-5377-48AC-9E8B-7D676A149503}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvaPub.Test.IntegrationTest", "test\ProvaPub.Test.IntegrationTest\ProvaPub.Test.IntegrationTest.csproj", "{66B2E5B2-FF0C-4D13-84D5-1C53FB81DE24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{4BE7DCC7-5377-48AC-9E8B-7D676A149503}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BE7DCC7-5377-48AC-9E8B-7D676A149503}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BE7DCC7-5377-48AC-9E8B-7D676A149503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66B2E5B2-FF0C-4D13-84D5-1C53FB81DE24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66B2E5B2-FF0C-4D13-84D5-1C53FB81DE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66B2E5B2-FF0C-4D13-84D5-1C53FB81DE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66B2E5B2-FF0C-4D13-84D5-1C53FB81DE24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{7CBEACC7-70CB-4E2F-8557-924726F69EF9} = {96D28A43-8B42-4E63-98BC-E9DF76AB09CE}
 		{498E72D5-4D97-46AC-8B18-3302C8321B0C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{4BE7DCC7-5377-48AC-9E8B-7D676A149503} = {498E72D5-4D97-46AC-8B18-3302C8321B0C}
+		{66B2E5B2-FF0C-4D13-84D5-1C53FB81DE24} = {96D28A43-8B42-4E63-98BC-E9DF76AB09CE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {508154CE-59FC-48C4-A288-C3D88E9607FE}
