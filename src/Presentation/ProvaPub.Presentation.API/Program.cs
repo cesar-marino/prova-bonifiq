@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using ProvaPub.Application.UseCases.RandomNumber.GenerateRandomNumber;
 using ProvaPub.Domain.Repositories;
@@ -20,7 +21,15 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(GenerateRandomNumberHandler).Assembly));
 
-builder.Services.AddDbContext<ProvaPubContext>(options => options.UseInMemoryDatabase("memory"));
+//builder.Services.AddDbContext<ProvaPubContext>(options =>
+//{
+//    options.UseInMemoryDatabase("memory");
+//});
+
+builder.Services.AddDbContext<ProvaPubContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ctx"));
+});
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IRandomNumberRepository, RandomNumberRepository>();
@@ -42,5 +51,4 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();

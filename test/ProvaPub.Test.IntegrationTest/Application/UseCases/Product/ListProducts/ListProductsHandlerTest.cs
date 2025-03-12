@@ -33,7 +33,7 @@ namespace ProvaPub.Test.IntegrationTest.Application.UseCases.Product.ListProduct
 
             Assert.Equal(page, response.Page);
             Assert.Equal(perPage, response.PerPage);
-            Assert.Equal(countItems < perPage, response.HasNext);
+            Assert.Equal(countItems > perPage, response.HasNext);
             Assert.Equal(countItems, response.Items.Count);
 
             response.Items.ForEach(item =>

@@ -61,7 +61,7 @@ namespace ProvaPub.Test.UnitTest.Application.UseCases.Product.ListProducts
             Assert.Equal(request.Page, response.Page);
             Assert.Equal(request.PerPage, response.PerPage);
             Assert.Equal(products.Count, response.Items.Count);
-            Assert.Equal(quantity < perPage, response.HasNext);
+            Assert.Equal(quantity > perPage, response.HasNext);
 
             response.Items.ForEach(item =>
             {

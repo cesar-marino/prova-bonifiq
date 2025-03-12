@@ -15,7 +15,7 @@ namespace ProvaPub.Application.UseCases.Product.ListProducts
             return new ListProductsResponse(
                 page: request.Page,
                 perPage: request.PerPage,
-                hasNext: products.Count < request.PerPage,
+                hasNext: products.Count > request.PerPage,
                 items: [.. products.Select(ProductResponse.FromEntity)]);
         }
     }

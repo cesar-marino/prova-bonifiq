@@ -14,7 +14,7 @@ namespace ProvaPub.Infrastructure.Data.Repositories
             {
                 return await context.Products
                     .AsNoTracking()
-                    .Skip((page - 1) * perPage)
+                    .Skip(page * perPage)
                     .Take(perPage)
                     .ToListAsync(cancellationToken);
             }
