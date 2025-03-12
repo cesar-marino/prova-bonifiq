@@ -24,6 +24,7 @@ builder.Services.AddDbContext<ProvaPubContext>(options => options.UseInMemoryDat
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IRandomNumberRepository, RandomNumberRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 

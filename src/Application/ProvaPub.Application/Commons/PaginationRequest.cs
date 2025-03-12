@@ -5,6 +5,6 @@
         int perPage = 10)
     {
         public int Page { get; } = page;
-        public int PerPage { get; } = perPage;
+        public int PerPage { get; set; } = perPage;
     }
 }
