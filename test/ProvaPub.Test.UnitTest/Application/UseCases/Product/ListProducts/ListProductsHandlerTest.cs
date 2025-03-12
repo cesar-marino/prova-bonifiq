@@ -40,10 +40,12 @@ namespace ProvaPub.Test.UnitTest.Application.UseCases.Product.ListProducts
 
         [Theory(DisplayName = nameof(ShouldReturnTheCorrectResponseIfFindAllAsyncReturnsListProducts))]
         [Trait("Unit/UseCases", "Product - ListProducts")]
-        [InlineData(0)]
-        [InlineData(5)]
-        [InlineData(10)]
-        public async Task ShouldReturnTheCorrectResponseIfFindAllAsyncReturnsListProducts(int quantity)
+        [InlineData(0, 10)]
+        [InlineData(5, 10)]
+        [InlineData(10, 10)]
+        [InlineData(30, 10)]
+        [InlineData(1000, 10)]
+        public async Task ShouldReturnTheCorrectResponseIfFindAllAsyncReturnsListProducts(int quantity, int perPage)
         {
             var products = _fixture.MakeListProducts(quantity);
             _productRepositoryMock
@@ -53,12 +55,14 @@ namespace ProvaPub.Test.UnitTest.Application.UseCases.Product.ListProducts
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync(products);
 
-            var request = _fixture.MakeListProductsRequest();
+            var request = _fixture.MakeListProductsRequest(perPage: perPage);
             var response = await _sut.Handle(request, _fixture.CancellationToken);
 
             Assert.Equal(request.Page, response.Page);
             Assert.Equal(request.PerPage, response.PerPage);
             Assert.Equal(products.Count, response.Items.Count);
+            Assert.Equal(quantity < perPage, response.HasNext);
+
             response.Items.ForEach(item =>
             {
                 var product = products.FirstOrDefault(x => x.Id == item.ProductId);

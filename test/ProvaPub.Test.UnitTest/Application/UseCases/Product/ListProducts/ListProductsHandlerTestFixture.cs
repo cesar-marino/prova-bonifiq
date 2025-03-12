@@ -6,7 +6,9 @@ namespace ProvaPub.Test.UnitTest.Application.UseCases.Product.ListProducts
 {
     public class ListProductsHandlerTestFixture : FixtureBase
     {
-        public ListProductsRequest MakeListProductsRequest() => new(page: Faker.Random.Int(), perPage: Faker.Random.Int());
+        public ListProductsRequest MakeListProductsRequest(int? perPage = null) => new(
+            page: Faker.Random.Int(),
+            perPage: perPage ?? Faker.Random.Int());
 
         public IReadOnlyList<ProductEntity> MakeListProducts(int qty = 0)
         {

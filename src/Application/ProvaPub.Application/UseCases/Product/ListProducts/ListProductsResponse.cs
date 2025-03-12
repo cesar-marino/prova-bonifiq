@@ -6,10 +6,12 @@ namespace ProvaPub.Application.UseCases.Product.ListProducts
     public class ListProductsResponse(
         int page,
         int perPage,
+        bool hasNext,
         List<ProductResponse> items) : PaginationResponse<ProductResponse>(
-            page,
-            perPage,
-            items)
+            page: page,
+            perPage: perPage,
+            hasNext: hasNext,
+            items: items)
     {
     }
 }
