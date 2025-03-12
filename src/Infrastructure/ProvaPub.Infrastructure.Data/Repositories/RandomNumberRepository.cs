@@ -24,22 +24,6 @@ namespace ProvaPub.Infrastructure.Data.Repositories
             }
         }
 
-        public async Task<IReadOnlyList<RandomNumberEntity>> FindAll(CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                var randomNumbers = await context.RandomNumbers
-                    .AsNoTracking()
-                    .ToListAsync(cancellationToken);
-
-                return randomNumbers;
-            }
-            catch (Exception ex)
-            {
-                throw new UnexpectedException(innerException: ex);
-            }
-        }
-
         public async Task<RandomNumberEntity> FindAsync(Guid id, CancellationToken cancellationToken = default)
         {
             try
