@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using ProvaPub.Domain.Entities;
 
 namespace ProvaPub.Test.UnitTest.Commons
 {
@@ -6,5 +7,9 @@ namespace ProvaPub.Test.UnitTest.Commons
     {
         public CancellationToken CancellationToken { get; } = default;
         public Faker Faker { get; } = new("pt_BR");
+
+        public ProductEntity MakeProductEntity() => new(
+            productId: Faker.Random.Guid(),
+            name: Faker.Random.String());
     }
 }

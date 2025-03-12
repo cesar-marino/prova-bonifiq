@@ -1,4 +1,5 @@
-﻿using ProvaPub.Domain.Repositories;
+﻿using ProvaPub.Application.UseCases.Product.Commons;
+using ProvaPub.Domain.Repositories;
 
 namespace ProvaPub.Application.UseCases.Product.ListProducts
 {
@@ -6,12 +7,15 @@ namespace ProvaPub.Application.UseCases.Product.ListProducts
     {
         public async Task<ListProductsResponse> Handle(ListProductsRequest request, CancellationToken cancellationToken)
         {
-            _ = await productRepository.FindAllAsync(
+            var products = await productRepository.FindAllAsync(
                 page: request.Page,
                 perPage: request.PerPage,
                 cancellationToken: cancellationToken);
 
-            throw new NotImplementedException();
+            return new ListProductsResponse(
+                page: request.Page,
+                perPage: request.PerPage,
+                items: [.. products.Select(ProductResponse.FromEntity)]);
         }
     }
 }
