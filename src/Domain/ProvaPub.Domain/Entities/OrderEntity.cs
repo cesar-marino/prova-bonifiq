@@ -7,10 +7,10 @@ namespace ProvaPub.Domain.Entities
         public decimal Value { get; }
         public DateTime OrderDate { get; }
 
-        public OrderEntity(decimal value, DateTime orderDate)
+        public OrderEntity(decimal value, DateTime? orderDate = null)
         {
             Value = value;
-            OrderDate = orderDate;
+            OrderDate = orderDate ?? DateTime.Now;
         }
 
         public OrderEntity(Guid orderId, decimal value, DateTime orderDate) : base(orderId)
