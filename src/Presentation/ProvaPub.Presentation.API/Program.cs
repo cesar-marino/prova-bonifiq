@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using ProvaPub.Application.Facades;
 using ProvaPub.Application.Factories;
