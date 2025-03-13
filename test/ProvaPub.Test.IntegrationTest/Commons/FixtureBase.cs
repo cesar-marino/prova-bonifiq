@@ -19,5 +19,11 @@ namespace ProvaPub.Test.IntegrationTest.Commons
             string? name = null) => new(
                 productId: productId ?? Faker.Random.Guid(),
                 name: name ?? Faker.Commerce.ProductName());
+
+        public CustomerEntity MakeCustomerEntity(
+            Guid? customerId = null,
+            string? name = null) => new(
+                customerId: customerId ?? Faker.Random.Guid(),
+                name: name ?? Faker.Commerce.ProductName());
     }
 }

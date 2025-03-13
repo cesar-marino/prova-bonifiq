@@ -8,12 +8,23 @@ namespace ProvaPub.Infrastructure.Data.Repositories
 {
     public class CustomerRepository(ProvaPubContext context) : ICustomerRepository
     {
-        public Task<IReadOnlyList<CustomerEntity>> FindAllAsync(
+        public async Task<IReadOnlyList<CustomerEntity>> FindAllAsync(
             int page,
             int perPage,
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await context.Customers
+                    .AsNoTracking()
+                    .Skip((page - 1) * perPage)
+                    .Take(perPage)
+                    .ToListAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                throw new UnexpectedException(innerException: ex);
+            }
         }
 
         public async Task<CustomerEntity> FindAsync(Guid id, CancellationToken cancellationToken = default)
