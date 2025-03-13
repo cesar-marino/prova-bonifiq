@@ -35,7 +35,7 @@ namespace ProvaPub.Application.UseCases.Customer.Commons
 
         public static CustomerOrderResponse FromEntity(OrderEntity order) => new(
             orderId: order.Id,
-            value: order.Value,
+            value: order.Amount,
             orderDate: order.OrderDate);
     }
 }

@@ -54,6 +54,13 @@ namespace ProvaPub.Test.UnitTest.Application.UseCases.Order.PayOrder
         [Trait("Unit/UseCases", "Order - PayOrder")]
         public async Task ShouldRethrowSameExceptionThatProcessThrows()
         {
+            var customer = _fixture.MakeCustomerEntity();
+            _customerRepositoryMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<Guid>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(customer);
+
             _paymentFacadeMock
                 .Setup(x => x.Process(
                     It.IsAny<decimal>(),
@@ -72,6 +79,13 @@ namespace ProvaPub.Test.UnitTest.Application.UseCases.Order.PayOrder
         [Trait("Unit/UseCases", "Order - PayOrder")]
         public async Task ShouldRethrowSameExceptionThatInsertAsyncThrows()
         {
+            var customer = _fixture.MakeCustomerEntity();
+            _customerRepositoryMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<Guid>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(customer);
+
             _orderRepositoryMock
                 .Setup(x => x.InsertAsync(
                     It.IsAny<OrderEntity>(),
@@ -90,6 +104,13 @@ namespace ProvaPub.Test.UnitTest.Application.UseCases.Order.PayOrder
         [Trait("Unit/UseCases", "Order - PayOrder")]
         public async Task ShouldRethrowSameExceptionThatCommitAsyncThrows()
         {
+            var customer = _fixture.MakeCustomerEntity();
+            _customerRepositoryMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<Guid>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(customer);
+
             _unitOfWorkMock
                 .Setup(x => x.CommitAsync(It.IsAny<CancellationToken>()))
                 .ThrowsAsync(new UnexpectedException());
@@ -100,6 +121,25 @@ namespace ProvaPub.Test.UnitTest.Application.UseCases.Order.PayOrder
             var exception = await Assert.ThrowsAsync<UnexpectedException>(act);
             Assert.Equal("unexpected", exception.Code);
             Assert.Equal("An unexpected error occurred", exception.Message);
+        }
+
+        [Fact(DisplayName = nameof(ShouldReturnTheCorrectResponseIfOrderIsPaidSuccessfully))]
+        [Trait("Unit/UseCases", "Order - PayOrder")]
+        public async Task ShouldReturnTheCorrectResponseIfOrderIsPaidSuccessfully()
+        {
+            var customer = _fixture.MakeCustomerEntity();
+            _customerRepositoryMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<Guid>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(customer);
+
+            var request = _fixture.MakePayOrderRequest();
+            var response = await _sut.Handle(request, _fixture.CancellationToken);
+
+            Assert.Equal(request.Amount, response.Amount);
+            Assert.Equal(customer.Id, response.Customer.CustomerId);
+            Assert.Equal(customer.Name, response.Customer.Name);
         }
     }
 }

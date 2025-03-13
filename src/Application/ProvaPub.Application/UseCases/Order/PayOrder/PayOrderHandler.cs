@@ -14,15 +14,14 @@ namespace ProvaPub.Application.UseCases.Order.PayOrder
     {
         public async Task<OrderResponse> Handle(PayOrderRequest request, CancellationToken cancellationToken)
         {
-            _ = await customerRepository.FindAsync(request.CustomerId, cancellationToken);
+            var customer = await customerRepository.FindAsync(request.CustomerId, cancellationToken);
 
             await paymentFacade.Process(request.Amount, request.PaymentMethod);
 
-            var order = new OrderEntity(customerId: request.CustomerId, value: request.Amount);
+            var order = new OrderEntity(customerId: customer.Id, amount: request.Amount);
             await orderRepository.InsertAsync(order, cancellationToken);
             await unitOfWork.CommitAsync(cancellationToken);
-
-            throw new NotImplementedException();
+            return OrderResponse.FromEntity(order, customer);
         }
     }
 }
