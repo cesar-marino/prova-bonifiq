@@ -37,5 +37,39 @@ namespace ProvaPub.Test.UnitTest.Application.UseCases.Customer.ListCustomers
             Assert.Equal("unexpected", exception.Code);
             Assert.Equal("An unexpected error occurred", exception.Message);
         }
+
+        [Theory(DisplayName = nameof(ShouldRethrowSameExceptionThatFindAllAsyncThrows))]
+        [Trait("Unit/UseCases", "Customer - ListCustomers")]
+        [InlineData(0, 10)]
+        [InlineData(5, 10)]
+        [InlineData(10, 10)]
+        [InlineData(30, 10)]
+        [InlineData(1000, 10)]
+        public async Task ShouldReturnTheCorrectResponseIfFindAllAsyncReturnsValidListCustomers(int quantity, int perPage)
+        {
+            var customers = _fixture.MakeListCustomers(quantity);
+            _customerRepositoryMock
+                .Setup(x => x.FindAllAsync(
+                    It.IsAny<int>(),
+                    It.IsAny<int>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(customers);
+
+            var request = _fixture.MakeListCustomersRequest(perPage: perPage);
+            var response = await _sut.Handle(request, _fixture.CancellationToken);
+
+            Assert.Equal(request.Page, response.Page);
+            Assert.Equal(request.PerPage, response.PerPage);
+            Assert.Equal(customers.Count, response.Items.Count);
+            Assert.Equal(quantity > perPage, response.HasNext);
+
+            response.Items.ForEach(item =>
+            {
+                var customer = customers.FirstOrDefault(x => x.Id == item.CustomerId);
+                Assert.NotNull(customer);
+                Assert.Equal(customer.Id, item.CustomerId);
+                Assert.Equal(customer.Name, item.Name);
+            });
+        }
     }
 }

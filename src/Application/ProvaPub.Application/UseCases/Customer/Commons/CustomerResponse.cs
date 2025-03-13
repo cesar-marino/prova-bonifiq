@@ -11,7 +11,7 @@ namespace ProvaPub.Application.UseCases.Customer.Commons
         public string Name { get; } = name;
         public List<CustomerOrderResponse> Orders { get; } = orders;
 
-        public static CustomerResponse FromEntity(CustomerEntity customer, IReadOnlyList<OrderEntity>? orders)
+        public static CustomerResponse FromEntity(CustomerEntity customer, IReadOnlyList<OrderEntity>? orders = null)
         {
             return new CustomerResponse(
                 customerId: customer.Id,

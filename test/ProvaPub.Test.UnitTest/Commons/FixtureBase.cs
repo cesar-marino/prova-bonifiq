@@ -11,5 +11,9 @@ namespace ProvaPub.Test.UnitTest.Commons
         public ProductEntity MakeProductEntity() => new(
             productId: Faker.Random.Guid(),
             name: Faker.Random.String());
+
+        public CustomerEntity MakeCustomerEntity() => new(
+            customerId: Faker.Random.Guid(),
+            name: Faker.Random.String());
     }
 }
