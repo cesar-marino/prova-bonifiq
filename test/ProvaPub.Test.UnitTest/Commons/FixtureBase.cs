@@ -10,10 +10,10 @@ namespace ProvaPub.Test.UnitTest.Commons
 
         public ProductEntity MakeProductEntity() => new(
             productId: Faker.Random.Guid(),
-            name: Faker.Random.String());
+            name: Faker.Commerce.Product());
 
         public CustomerEntity MakeCustomerEntity() => new(
             customerId: Faker.Random.Guid(),
-            name: Faker.Random.String());
+            name: Faker.Person.FullName);
     }
 }
