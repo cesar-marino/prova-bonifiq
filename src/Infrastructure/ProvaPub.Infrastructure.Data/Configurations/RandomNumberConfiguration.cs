@@ -1,16 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ProvaPub.Domain.Entities;
+using ProvaPub.Infrastructure.Data.Models;
 
 namespace ProvaPub.Infrastructure.Data.Configurations
 {
-    public class RandomNumberConfiguration : IEntityTypeConfiguration<RandomNumberEntity>
+    public class RandomNumberConfiguration : IEntityTypeConfiguration<RandomNumberModel>
     {
-        public void Configure(EntityTypeBuilder<RandomNumberEntity> builder)
+        public void Configure(EntityTypeBuilder<RandomNumberModel> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.RandomNumberId);
 
-            builder.Property(x => x.Id)
+            builder.Property(x => x.RandomNumberId)
                 .ValueGeneratedNever()
                 .IsRequired();
 

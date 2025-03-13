@@ -3,6 +3,7 @@ using ProvaPub.Domain.Entities;
 using ProvaPub.Domain.Exceptions;
 using ProvaPub.Domain.Repositories;
 using ProvaPub.Infrastructure.Data.Contexts;
+using ProvaPub.Infrastructure.Data.Models;
 
 namespace ProvaPub.Infrastructure.Data.Repositories
 {
@@ -30,9 +31,9 @@ namespace ProvaPub.Infrastructure.Data.Repositories
             {
                 var randomNumber = await context.RandomNumbers
                     .AsNoTracking()
-                    .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+                    .FirstOrDefaultAsync(x => x.RandomNumberId == id, cancellationToken);
 
-                return randomNumber ?? throw new NotFoundException("RandomNumber");
+                return randomNumber?.ToEntity() ?? throw new NotFoundException("RandomNumber");
             }
             catch (DomainException)
             {
@@ -48,7 +49,8 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                await context.RandomNumbers.AddAsync(entity, cancellationToken);
+                var model = RandomNumberModel.FromEntity(entity);
+                await context.RandomNumbers.AddAsync(model, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -60,7 +62,7 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                var randomNumber = await context.RandomNumbers.FirstOrDefaultAsync(x => x.Id == id, cancellationToken)
+                var randomNumber = await context.RandomNumbers.FirstOrDefaultAsync(x => x.RandomNumberId == id, cancellationToken)
                     ?? throw new NotFoundException("RandomNumber");
 
                 context.RandomNumbers.Remove(randomNumber);
@@ -79,7 +81,7 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                var randomNumber = await context.RandomNumbers.FirstOrDefaultAsync(x => x.Id == entity.Id, cancellationToken)
+                var randomNumber = await context.RandomNumbers.FirstOrDefaultAsync(x => x.RandomNumberId == entity.Id, cancellationToken)
                     ?? throw new NotFoundException("RandomNumber");
 
                 context.Entry(randomNumber).CurrentValues.SetValues(entity);

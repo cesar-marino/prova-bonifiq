@@ -11,6 +11,10 @@ namespace ProvaPub.Domain.Entities
             Number = GenerateNumber();
         }
 
+        public RandomNumberEntity(
+            Guid randomNumberId,
+            int number) : base(randomNumberId) => Number = number;
+
         public int GenerateNumber()
         {
             var randon = new Random(Id.GetHashCode());

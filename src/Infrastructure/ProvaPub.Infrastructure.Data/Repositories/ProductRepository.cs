@@ -3,6 +3,7 @@ using ProvaPub.Domain.Entities;
 using ProvaPub.Domain.Exceptions;
 using ProvaPub.Domain.Repositories;
 using ProvaPub.Infrastructure.Data.Contexts;
+using ProvaPub.Infrastructure.Data.Models;
 
 namespace ProvaPub.Infrastructure.Data.Repositories
 {
@@ -12,11 +13,13 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                return await context.Products
+                var models = await context.Products
                     .AsNoTracking()
                     .Skip((page - 1) * perPage)
                     .Take(perPage)
                     .ToListAsync(cancellationToken);
+
+                return [.. models.Select(x => x.ToEntity())];
             }
             catch (Exception ex)
             {
@@ -28,8 +31,10 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                return await context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id, cancellationToken)
+                var model = await context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.ProductId == id, cancellationToken)
                     ?? throw new NotFoundException("Product");
+
+                return model.ToEntity();
             }
             catch (DomainException)
             {
@@ -45,7 +50,8 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                await context.Products.AddAsync(entity, cancellationToken);
+                var model = ProductModel.FromEntity(entity);
+                await context.Products.AddAsync(model, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -57,7 +63,7 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                var product = await context.Products.FirstOrDefaultAsync(x => x.Id == id, cancellationToken)
+                var product = await context.Products.FirstOrDefaultAsync(x => x.ProductId == id, cancellationToken)
                     ?? throw new NotFoundException("Product");
 
                 context.Products.Remove(product);
@@ -76,7 +82,7 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                var product = await context.Products.FirstOrDefaultAsync(x => x.Id == entity.Id, cancellationToken)
+                var product = await context.Products.FirstOrDefaultAsync(x => x.ProductId == entity.Id, cancellationToken)
                     ?? throw new NotFoundException("Product");
 
                 context.Entry(product).CurrentValues.SetValues(entity);

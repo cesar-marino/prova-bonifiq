@@ -38,10 +38,10 @@ namespace ProvaPub.Test.IntegrationTest.Application.UseCases.Customer.ListCustom
 
             response.Items.ForEach(item =>
             {
-                var customer = customers.FirstOrDefault(x => x.Id == item.CustomerId);
+                var customer = customers.FirstOrDefault(x => x.CustomerId == item.CustomerId);
                 Assert.NotNull(customer);
                 Assert.Equal(item.Name, customer.Name);
-                Assert.Equal(item.CustomerId, customer.Id);
+                Assert.Equal(item.CustomerId, customer.CustomerId);
             });
         }
     }

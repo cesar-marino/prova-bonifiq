@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using Microsoft.EntityFrameworkCore;
-using ProvaPub.Domain.Entities;
 using ProvaPub.Infrastructure.Data.Contexts;
+using ProvaPub.Infrastructure.Data.Models;
 
 namespace ProvaPub.Test.IntegrationTest.Commons
 {
@@ -14,13 +14,13 @@ namespace ProvaPub.Test.IntegrationTest.Commons
             new DbContextOptionsBuilder<ProvaPubContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options);
 
-        public ProductEntity MakeProductEntity(
+        public ProductModel MakeProductModel(
             Guid? productId = null,
             string? name = null) => new(
                 productId: productId ?? Faker.Random.Guid(),
                 name: name ?? Faker.Commerce.ProductName());
 
-        public CustomerEntity MakeCustomerEntity(
+        public CustomerModel MakeCustomerModel(
             Guid? customerId = null,
             string? name = null) => new(
                 customerId: customerId ?? Faker.Random.Guid(),

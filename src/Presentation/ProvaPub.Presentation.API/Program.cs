@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using ProvaPub.Application.Facades;
+using ProvaPub.Application.Factories;
 using ProvaPub.Application.UseCases.RandomNumber.GenerateRandomNumber;
 using ProvaPub.Domain.Repositories;
 using ProvaPub.Domain.SeedWork;
@@ -35,6 +37,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IRandomNumberRepository, RandomNumberRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+builder.Services.AddScoped<IPaymentMethodFactory, PaymentMethodFactory>();
+builder.Services.AddScoped<IPaymentFacade, PaymentFacade>();
 
 var app = builder.Build();
 

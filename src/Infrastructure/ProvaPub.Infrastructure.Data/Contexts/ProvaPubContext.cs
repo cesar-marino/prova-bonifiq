@@ -1,29 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProvaPub.Domain.Entities;
 using ProvaPub.Infrastructure.Data.Configurations;
+using ProvaPub.Infrastructure.Data.Models;
 
 namespace ProvaPub.Infrastructure.Data.Contexts
 {
     public class ProvaPubContext(DbContextOptions<ProvaPubContext> options) : DbContext(options)
     {
-        public DbSet<RandomNumberEntity> RandomNumbers { get; private set; }
-        public DbSet<ProductEntity> Products { get; private set; }
-        public DbSet<CustomerEntity> Customers { get; private set; }
+        public DbSet<RandomNumberModel> RandomNumbers { get; private set; }
+        public DbSet<ProductModel> Products { get; private set; }
+        public DbSet<CustomerModel> Customers { get; private set; }
+        public DbSet<OrderModel> Orders { get; private set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new RandomNumberConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
 
-            modelBuilder.Entity<ProductEntity>().HasData(GetProductSeed());
-            modelBuilder.Entity<CustomerEntity>().HasData(GetCustomerSeed());
-            modelBuilder.Entity<RandomNumberEntity>().HasIndex(s => s.Number).IsUnique();
+            modelBuilder.Entity<ProductModel>().HasData(GetProductSeed());
+            modelBuilder.Entity<CustomerModel>().HasData(GetCustomerSeed());
+            modelBuilder.Entity<RandomNumberModel>().HasIndex(s => s.Number).IsUnique();
 
             base.OnModelCreating(modelBuilder);
         }
 
-        private static List<CustomerEntity> GetCustomerSeed()
+        private static List<CustomerModel> GetCustomerSeed()
         {
             //List<CustomerEntity> customers = [];
 
@@ -57,7 +59,7 @@ namespace ProvaPub.Infrastructure.Data.Contexts
             ];
         }
 
-        private static List<ProductEntity> GetProductSeed()
+        private static List<ProductModel> GetProductSeed()
         {
             //List<ProductEntity> products = [];
 

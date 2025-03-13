@@ -1,5 +1,5 @@
 ﻿using ProvaPub.Application.UseCases.Customer.ListCustomers;
-using ProvaPub.Domain.Entities;
+using ProvaPub.Infrastructure.Data.Models;
 using ProvaPub.Test.IntegrationTest.Commons;
 
 namespace ProvaPub.Test.IntegrationTest.Application.UseCases.Customer.ListCustomers
@@ -10,11 +10,11 @@ namespace ProvaPub.Test.IntegrationTest.Application.UseCases.Customer.ListCustom
             page: page,
             perPage: perPage);
 
-        public List<CustomerEntity> MakeListCustomers(int qty = 1)
+        public List<CustomerModel> MakeListCustomers(int qty = 1)
         {
-            List<CustomerEntity> customers = [];
+            List<CustomerModel> customers = [];
             for (int i = 0; i < qty; i++)
-                customers.Add(MakeCustomerEntity());
+                customers.Add(MakeCustomerModel());
 
             return customers;
         }

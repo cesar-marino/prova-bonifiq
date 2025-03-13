@@ -1,16 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ProvaPub.Domain.Entities;
+using ProvaPub.Infrastructure.Data.Models;
 
 namespace ProvaPub.Infrastructure.Data.Configurations
 {
-    public class ProductConfiguration : IEntityTypeConfiguration<ProductEntity>
+    public class ProductConfiguration : IEntityTypeConfiguration<ProductModel>
     {
-        public void Configure(EntityTypeBuilder<ProductEntity> builder)
+        public void Configure(EntityTypeBuilder<ProductModel> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.ProductId);
 
-            builder.Property(x => x.Id)
+            builder.Property(x => x.ProductId)
                 .ValueGeneratedNever()
                 .IsRequired();
 

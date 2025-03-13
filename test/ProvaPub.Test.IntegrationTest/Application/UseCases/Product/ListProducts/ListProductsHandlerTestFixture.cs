@@ -1,5 +1,5 @@
 ﻿using ProvaPub.Application.UseCases.Product.ListProducts;
-using ProvaPub.Domain.Entities;
+using ProvaPub.Infrastructure.Data.Models;
 using ProvaPub.Test.IntegrationTest.Commons;
 
 namespace ProvaPub.Test.IntegrationTest.Application.UseCases.Product.ListProducts
@@ -10,11 +10,11 @@ namespace ProvaPub.Test.IntegrationTest.Application.UseCases.Product.ListProduct
             page: page,
             perPage: perPage);
 
-        public List<ProductEntity> MakeListProducts(int qty = 1)
+        public List<ProductModel> MakeListProducts(int qty = 1)
         {
-            List<ProductEntity> products = [];
+            List<ProductModel> products = [];
             for (int i = 0; i < qty; i++)
-                products.Add(MakeProductEntity());
+                products.Add(MakeProductModel());
 
             return products;
         }

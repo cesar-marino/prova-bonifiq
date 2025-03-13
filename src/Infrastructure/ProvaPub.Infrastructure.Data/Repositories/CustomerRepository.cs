@@ -3,6 +3,7 @@ using ProvaPub.Domain.Entities;
 using ProvaPub.Domain.Exceptions;
 using ProvaPub.Domain.Repositories;
 using ProvaPub.Infrastructure.Data.Contexts;
+using ProvaPub.Infrastructure.Data.Models;
 
 namespace ProvaPub.Infrastructure.Data.Repositories
 {
@@ -15,11 +16,13 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                return await context.Customers
+                var models = await context.Customers
                     .AsNoTracking()
                     .Skip((page - 1) * perPage)
                     .Take(perPage)
                     .ToListAsync(cancellationToken);
+
+                return [.. models.Select(x => x.ToEntity())];
             }
             catch (Exception ex)
             {
@@ -31,8 +34,10 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                return await context.Customers.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id, cancellationToken)
+                var model = await context.Customers.AsNoTracking().FirstOrDefaultAsync(x => x.CustomerId == id, cancellationToken)
                     ?? throw new NotFoundException("Customer");
+
+                return model.ToEntity();
             }
             catch (DomainException)
             {
@@ -48,7 +53,8 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                await context.Customers.AddAsync(entity, cancellationToken);
+                var model = CustomerModel.FromEntity(entity);
+                await context.Customers.AddAsync(model, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -60,7 +66,7 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                var customer = await context.Customers.FirstOrDefaultAsync(x => x.Id == id, cancellationToken)
+                var customer = await context.Customers.FirstOrDefaultAsync(x => x.CustomerId == id, cancellationToken)
                     ?? throw new NotFoundException("Customer");
 
                 context.Customers.Remove(customer);
@@ -79,7 +85,7 @@ namespace ProvaPub.Infrastructure.Data.Repositories
         {
             try
             {
-                var customer = await context.Customers.FirstOrDefaultAsync(x => x.Id == entity.Id, cancellationToken)
+                var customer = await context.Customers.FirstOrDefaultAsync(x => x.CustomerId == entity.Id, cancellationToken)
                     ?? throw new NotFoundException("Customer");
 
                 context.Entry(customer).CurrentValues.SetValues(entity);
