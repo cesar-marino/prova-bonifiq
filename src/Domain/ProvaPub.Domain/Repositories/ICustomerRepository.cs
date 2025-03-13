@@ -3,11 +3,7 @@ using ProvaPub.Domain.SeedWork;
 
 namespace ProvaPub.Domain.Repositories
 {
-    public interface ICustomerRepository : IRepository<CustomerEntity>
+    public interface ICustomerRepository : IRepository<CustomerEntity>, ISearchableRepository<CustomerEntity>
     {
-        Task<IReadOnlyList<CustomerEntity>> FindAllAsync(
-            int page,
-            int perPage,
-            CancellationToken cancellationToken = default);
     }
 }
