@@ -4,12 +4,12 @@ namespace ProvaPub.Domain.Specifications
 {
     public class PurchaseDataSpecification : ISpecification<OrderEntity>
     {
-        public bool IsSatisfiedBy(OrderEntity entity)
+        public bool IsSatisfiedBy(OrderEntity order)
         {
-            return !(DateTime.UtcNow.Hour < 8
-                || DateTime.UtcNow.Hour > 18
-                || DateTime.UtcNow.DayOfWeek == DayOfWeek.Saturday
-                || DateTime.UtcNow.DayOfWeek == DayOfWeek.Sunday);
+            return !(order.OrderDate.Hour < 8
+                || order.OrderDate.Hour > 18
+                || order.OrderDate.DayOfWeek == DayOfWeek.Saturday
+                || order.OrderDate.DayOfWeek == DayOfWeek.Sunday);
         }
     }
 }

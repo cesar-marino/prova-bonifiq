@@ -28,18 +28,19 @@ namespace ProvaPub.Test.UnitTest.Domain.Specifications
 
             Assert.False(result);
         }
-        
-        [Theory(DisplayName = nameof(ShouldReturnFalseIfItIsNotBusinessDay))]
+
+        [Theory(DisplayName = nameof(ShouldReturnTrueIfItIsABusinessDayAndBusinessHours))]
         [Trait("Unit/Specification", "PurchaseDate")]
-        [InlineData(15)]
-        [InlineData(16)]
-        [InlineData(22)]
-        [InlineData(23)]
-        public void ShouldReturnFalseIfItIsNotBusinessDay(int day)
+        [InlineData(2025, 3, 10)]
+        [InlineData(2025, 3, 11)]
+        [InlineData(2025, 3, 12)]
+        [InlineData(2025, 3, 13)]
+        [InlineData(2025, 3, 14)]
+        public void ShouldReturnTrueIfItIsABusinessDayAndBusinessHours(int year, int month, int day)
         {
             var date = new DateTime(
-                year: 2025,
-                month: 3,
+                year: year,
+                month: month,
                 day: day,
                 hour: 8,
                 minute: 0,
@@ -50,7 +51,7 @@ namespace ProvaPub.Test.UnitTest.Domain.Specifications
 
             var result = spec.IsSatisfiedBy(order);
 
-            Assert.False(result);
+            Assert.True(result);
         }
     }
 }
