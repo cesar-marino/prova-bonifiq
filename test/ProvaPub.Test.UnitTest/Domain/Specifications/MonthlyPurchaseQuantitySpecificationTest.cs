@@ -17,5 +17,18 @@ namespace ProvaPub.Test.UnitTest.Domain.Specifications
 
             Assert.False(result);
         }
+
+        [Fact(DisplayName = nameof(ShouldReturnThrueIfItIsTheFistPurchaseOfTheMonth))]
+        [Trait("Unit/Specifications", "MonthlyPurchaseQuantity")]
+        public void ShouldReturnThrueIfItIsTheFistPurchaseOfTheMonth()
+        {
+            var orders = new List<OrderEntity>();
+            var order = new OrderEntity(customerId: Guid.NewGuid(), amount: 90);
+            var spec = new MonthlyPurchaseQuantitySpecification(orders);
+
+            var result = spec.IsSatisfiedBy(order);
+
+            Assert.True(result);
+        }
     }
 }
