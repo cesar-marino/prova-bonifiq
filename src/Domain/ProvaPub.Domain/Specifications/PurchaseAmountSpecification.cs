@@ -4,9 +4,6 @@ namespace ProvaPub.Domain.Specifications
 {
     public class PurchaseAmountSpecification : ISpecification<OrderEntity>
     {
-        public bool IsSatisfiedBy(OrderEntity order)
-        {
-            return order.Amount > 0;
-        }
+        public bool IsSatisfiedBy(OrderEntity order) => order.Amount > 0;
     }
 }
