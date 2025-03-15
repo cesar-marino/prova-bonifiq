@@ -6,7 +6,8 @@ namespace ProvaPub.Domain.Specifications
     {
         public bool IsSatisfiedBy(OrderEntity entity)
         {
-            throw new NotImplementedException();
+            return orders.Count == 0
+                && entity.Amount <= 100;
         }
     }
 }
