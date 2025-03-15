@@ -22,7 +22,7 @@ namespace ProvaPub.Test.UnitTest.Domain.Specifications
                 second: 0);
 
             var order = new OrderEntity(customerId: Guid.NewGuid(), amount: 1, orderDate: date);
-            var spec = new PurchaseDataSpecification();
+            var spec = new PurchaseDateSpecification();
 
             var result = spec.IsSatisfiedBy(order);
 
@@ -47,7 +47,7 @@ namespace ProvaPub.Test.UnitTest.Domain.Specifications
                 second: 0);
 
             var order = new OrderEntity(customerId: Guid.NewGuid(), amount: 1, orderDate: date);
-            var spec = new PurchaseDataSpecification();
+            var spec = new PurchaseDateSpecification();
 
             var result = spec.IsSatisfiedBy(order);
 

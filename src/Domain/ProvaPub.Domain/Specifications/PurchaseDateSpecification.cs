@@ -2,7 +2,7 @@
 
 namespace ProvaPub.Domain.Specifications
 {
-    public class PurchaseDataSpecification : ISpecification<OrderEntity>
+    public class PurchaseDateSpecification : ISpecification<OrderEntity>
     {
         public bool IsSatisfiedBy(OrderEntity order)
         {
