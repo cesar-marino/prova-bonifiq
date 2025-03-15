@@ -19,5 +19,20 @@ namespace ProvaPub.Test.UnitTest.Domain.Specifications
 
             Assert.False(result);
         }
+
+        [Theory(DisplayName = nameof(ShouldReturnTrueIfAmountIsValid))]
+        [Trait("Unit/Specifications", "PurchaseAmount")]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(15.73)]
+        public void ShouldReturnTrueIfAmountIsValid(decimal amount)
+        {
+            var order = new OrderEntity(customerId: Guid.NewGuid(), amount: amount);
+            var spec = new PurchaseAmountSpecification();
+
+            var result = spec.IsSatisfiedBy(order);
+
+            Assert.True(result);
+        }
     }
 }
