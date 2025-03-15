@@ -1,5 +1,4 @@
-﻿using ProvaPub.Domain.Exceptions;
-using ProvaPub.Domain.SeedWork;
+﻿using ProvaPub.Domain.SeedWork;
 
 namespace ProvaPub.Domain.Entities
 {
@@ -17,8 +16,6 @@ namespace ProvaPub.Domain.Entities
             CustomerId = customerId;
             Amount = amount;
             OrderDate = orderDate ?? DateTime.Now;
-
-            Validate();
         }
 
         public OrderEntity(
@@ -30,12 +27,6 @@ namespace ProvaPub.Domain.Entities
             CustomerId = customerId;
             Amount = amount;
             OrderDate = orderDate;
-        }
-
-        private void Validate()
-        {
-            if (Amount <= 0)
-                throw new EntityValidationException(message: "O valor da compra deve ser maior que zero");
         }
     }
 }
