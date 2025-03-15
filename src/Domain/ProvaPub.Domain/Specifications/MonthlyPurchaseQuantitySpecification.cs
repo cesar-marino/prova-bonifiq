@@ -6,7 +6,9 @@ namespace ProvaPub.Domain.Specifications
     {
         public bool IsSatisfiedBy(OrderEntity entity)
         {
-            throw new NotImplementedException();
+            var baseDate = DateTime.UtcNow.AddMonths(-1);
+            var ordersInThisMonth = orders.Where(x => x.OrderDate >= baseDate);
+            return !ordersInThisMonth.Any();
         }
     }
 }
