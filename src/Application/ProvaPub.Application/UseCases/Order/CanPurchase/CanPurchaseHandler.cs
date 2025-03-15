@@ -12,8 +12,8 @@ namespace ProvaPub.Application.UseCases.Order.CanPurchase
 
 
             //2. O cliente deve estar registrado para realizar a compra
-            //1. O valor da compra deve ser maior que zero
 
+            //1. O valor da compra deve ser maior que zero
             //3. O cliente pode comprar apenas uma vez por mês
             //4. A primeira compra deve ter valor máximo de 100 reais
             //5. O cliente pode comprar apenas em horário comercial
