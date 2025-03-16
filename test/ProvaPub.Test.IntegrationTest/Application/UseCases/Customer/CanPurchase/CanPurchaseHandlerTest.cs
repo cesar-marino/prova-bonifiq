@@ -117,5 +117,62 @@ namespace ProvaPub.Test.IntegrationTest.Application.UseCases.Customer.CanPurchas
 
             Assert.False(response);
         }
+
+        //[Theory(DisplayName = nameof(ShouldReturnFalseIfItIsNotABusinessDayAndBusinessHours))]
+        //[Trait("Integration/UseCases", "Customer - CanPurchase")]
+        //[InlineData(2025, 03, 16, 0, 0)]
+        //public async Task ShouldReturnFalseIfItIsNotABusinessDayAndBusinessHours(int year, int month, int day, int hour, int minute)
+        //{
+        //    var context = _fixture.MakeContext();
+        //    var customer = _fixture.MakeCustomerModel();
+        //    var order = _fixture.MakeOrderModel();
+
+        //    var customerTrackingInfo = await context.Customers.AddAsync(customer);
+        //    var orderTrackingInfo = await context.Orders.AddAsync(order);
+        //    await context.SaveChangesAsync();
+        //    customerTrackingInfo.State = EntityState.Detached;
+        //    orderTrackingInfo.State = EntityState.Detached;
+
+        //    var customerRepository = new CustomerRepository(context);
+        //    var orderRepository = new OrderRepository(context);
+        //    var canPurchaseSpecificationFactory = new CanPurchaseSpecificationFactory();
+
+        //    var sut = new CanPurchaseHandler(
+        //        customerRepository: customerRepository,
+        //        orderRepository: orderRepository,
+        //        canPurcahaseSpecificationFactory: canPurchaseSpecificationFactory);
+
+        //    var orderDate = new DateTime(year, month, day, hour, minute, 0);
+        //    var request = _fixture.MakeCanPurchaseRequest(customerId: customer.CustomerId);
+        //    var response = await sut.Handle(request, _fixture.CancellationToken);
+
+        //    Assert.False(response);
+        //}
+
+        //[Fact(DisplayName = nameof(ShouldReturnTrueIfThePurchaseMeetsAllSpecifications))]
+        //[Trait("Integration/UseCases", "Customer - CanPurchase")]
+        //public async Task ShouldReturnTrueIfThePurchaseMeetsAllSpecifications()
+        //{
+        //    var context = _fixture.MakeContext();
+        //    var customer = _fixture.MakeCustomerModel();
+
+        //    var customerTrackingInfo = await context.Customers.AddAsync(customer);
+        //    await context.SaveChangesAsync();
+        //    customerTrackingInfo.State = EntityState.Detached;
+
+        //    var customerRepository = new CustomerRepository(context);
+        //    var orderRepository = new OrderRepository(context);
+        //    var canPurchaseSpecificationFactory = new CanPurchaseSpecificationFactory();
+
+        //    var sut = new CanPurchaseHandler(
+        //        customerRepository: customerRepository,
+        //        orderRepository: orderRepository,
+        //        canPurcahaseSpecificationFactory: canPurchaseSpecificationFactory);
+
+        //    var request = _fixture.MakeCanPurchaseRequest(customerId: customer.CustomerId, amount: 50);
+        //    var response = await sut.Handle(request, _fixture.CancellationToken);
+
+        //    Assert.True(response);
+        //}
     }
 }
