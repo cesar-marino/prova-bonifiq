@@ -9,7 +9,7 @@ namespace ProvaPub.Presentation.API.Controllers
     [ApiController]
     public class CustomerController(IMediator mediator) : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("list")]
         public async Task<IActionResult> List(
             [FromQuery] int page,
             [FromQuery] int? perPage = null,
@@ -23,7 +23,7 @@ namespace ProvaPub.Presentation.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet]
+        [HttpGet("can_purchase")]
         public async Task<IActionResult> CanPurchase(
             [FromBody] CanPurchaseRequest request,
             CancellationToken cancellationToken = default)
