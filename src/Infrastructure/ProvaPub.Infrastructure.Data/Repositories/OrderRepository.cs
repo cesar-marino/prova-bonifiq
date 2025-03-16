@@ -18,7 +18,7 @@ namespace ProvaPub.Infrastructure.Data.Repositories
                     .Where(x => x.CustomerId == customerId)
                     .ToListAsync(cancellationToken);
 
-                return (IReadOnlyList<OrderEntity>)models.Select(x => x.ToEntity());
+                return [.. models.Select(x => x.ToEntity())];
             }
             catch (Exception ex)
             {
