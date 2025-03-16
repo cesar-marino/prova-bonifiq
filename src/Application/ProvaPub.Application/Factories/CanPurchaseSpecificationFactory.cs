@@ -3,9 +3,9 @@ using ProvaPub.Domain.Specifications;
 
 namespace ProvaPub.Application.Factories
 {
-    public static class CanPurchaseSpecificationFactory
+    public class CanPurchaseSpecificationFactory
     {
-        public static CompositeSpecification<OrderEntity> CreateOrderSpecification(IReadOnlyList<OrderEntity> orders)
+        public CompositeSpecification<OrderEntity> CreateOrderSpecification(IReadOnlyList<OrderEntity> orders)
         {
             var compositeSpec = new CompositeSpecification<OrderEntity>();
 

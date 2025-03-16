@@ -1,10 +1,15 @@
 ﻿
+using ProvaPub.Domain.Repositories;
+
 namespace ProvaPub.Application.UseCases.Order.CanPurchase
 {
-    public class CanPurchaseHandler : ICanPurchaseHandler
+    public class CanPurchaseHandler(ICustomerRepository customerRepository) : ICanPurchaseHandler
     {
-        public Task<bool> Handle(CanPurchaseRequest request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(CanPurchaseRequest request, CancellationToken cancellationToken)
         {
+            _ = await customerRepository.FindAsync(request.CustomerId, cancellationToken);
+
+
             //Recuperar o customer (se não existir lança NotFoundException - Atende a regra 2)
             //Cria uma Order (se o valor de amount for menor que 1 lança Exception - Deve ser atendida no construtor da classe order)
 
