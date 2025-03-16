@@ -15,6 +15,7 @@ namespace ProvaPub.Infrastructure.Data.Configurations
                 .IsRequired();
 
             builder.Property(x => x.Amount)
+                .HasPrecision(28, 2)
                 .IsRequired();
 
             builder.Property(x => x.OrderDate)
