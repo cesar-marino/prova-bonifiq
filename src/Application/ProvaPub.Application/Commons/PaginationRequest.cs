@@ -2,9 +2,9 @@
 {
     public abstract class PaginationRequest(
         int page,
-        int perPage = 10)
+        int perPage)
     {
-        public int Page { get; } = page;
-        public int PerPage { get; set; } = perPage;
+        public int Page { get; } = page <= 0 ? 1 : page;
+        public int PerPage { get; set; } = perPage <= 0 ? 10 : perPage;
     }
 }

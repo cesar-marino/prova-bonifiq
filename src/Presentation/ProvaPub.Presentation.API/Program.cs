@@ -6,13 +6,19 @@ using ProvaPub.Domain.Repositories;
 using ProvaPub.Domain.SeedWork;
 using ProvaPub.Infrastructure.Data.Contexts;
 using ProvaPub.Infrastructure.Data.Repositories;
+using ProvaPub.Presentation.API.Filters;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-//builder.Services.AddControllers(options => options.Filters.Add(typeof(ApiGlobalExceptionFilter))).AddJsonOptions(jsonOptions => { });
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add<ApiGlobalExceptionFilter>())
+    .AddJsonOptions(jsonOptions =>
+    {
+        jsonOptions.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    });
+
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

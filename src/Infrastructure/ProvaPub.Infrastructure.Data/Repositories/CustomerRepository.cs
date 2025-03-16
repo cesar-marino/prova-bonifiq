@@ -18,6 +18,7 @@ namespace ProvaPub.Infrastructure.Data.Repositories
             {
                 var models = await context.Customers
                     .AsNoTracking()
+                    .Include(x => x.Orders)
                     .Skip((page - 1) * perPage)
                     .Take(perPage)
                     .ToListAsync(cancellationToken);

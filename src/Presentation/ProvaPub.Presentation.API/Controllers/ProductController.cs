@@ -9,6 +9,8 @@ namespace ProvaPub.Presentation.API.Controllers
     public class ProductController(IMediator mediator) : ControllerBase
     {
         [HttpGet("list")]
+        [ProducesResponseType(typeof(ListProductsResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> List(
             [FromQuery] int page,
             [FromQuery] int? perPage = null,

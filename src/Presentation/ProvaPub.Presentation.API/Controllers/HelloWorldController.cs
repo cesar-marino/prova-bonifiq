@@ -7,6 +7,8 @@ namespace ProvaPub.Presentation.API.Controllers
     public class HelloWorldController : ControllerBase
     {
         [HttpGet("hello")]
+
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         public ActionResult Hello() => Ok("Hello World!");
     }
 }
