@@ -3,11 +3,14 @@ using ProvaPub.Domain.Repositories;
 
 namespace ProvaPub.Application.UseCases.Order.CanPurchase
 {
-    public class CanPurchaseHandler(ICustomerRepository customerRepository) : ICanPurchaseHandler
+    public class CanPurchaseHandler(
+        ICustomerRepository customerRepository,
+        IOrderRepository orderRepository) : ICanPurchaseHandler
     {
         public async Task<bool> Handle(CanPurchaseRequest request, CancellationToken cancellationToken)
         {
-            _ = await customerRepository.FindAsync(request.CustomerId, cancellationToken);
+            var customer = await customerRepository.FindAsync(request.CustomerId, cancellationToken);
+            _ = await orderRepository.FindAllByCustomerIdAsync(customer.Id, cancellationToken);
 
 
             //Recuperar o customer (se não existir lança NotFoundException - Atende a regra 2)

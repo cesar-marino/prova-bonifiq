@@ -9,6 +9,11 @@ namespace ProvaPub.Infrastructure.Data.Repositories
 {
     public class OrderRepository(ProvaPubContext context) : IOrderRepository
     {
+        public Task<IReadOnlyList<OrderEntity>> FindAllByCustomerIdAsync(Guid customerId, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<OrderEntity> FindAsync(Guid id, CancellationToken cancellationToken = default)
         {
             try
