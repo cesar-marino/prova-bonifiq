@@ -25,9 +25,11 @@ namespace ProvaPub.Presentation.API.Controllers
 
         [HttpGet("can_purchase")]
         public async Task<IActionResult> CanPurchase(
-            [FromBody] CanPurchaseRequest request,
+            [FromQuery] Guid customerId,
+            [FromQuery] decimal amount,
             CancellationToken cancellationToken = default)
         {
+            var request = new CanPurchaseRequest(customerId: customerId, amount: amount);
             var response = await mediator.Send(request, cancellationToken);
             return Ok(response);
         }

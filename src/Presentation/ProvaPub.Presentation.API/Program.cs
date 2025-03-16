@@ -41,6 +41,8 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IPaymentMethodFactory, PaymentMethodFactory>();
 builder.Services.AddScoped<IPaymentFacade, PaymentFacade>();
 
+builder.Services.AddScoped<ICanPurchaseSpecificationFactory, CanPurchaseSpecificationFactory>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
