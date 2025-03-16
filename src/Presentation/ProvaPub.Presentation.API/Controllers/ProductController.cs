@@ -8,7 +8,7 @@ namespace ProvaPub.Presentation.API.Controllers
     [ApiController]
     public class ProductController(IMediator mediator) : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("list")]
         public async Task<IActionResult> List(
             [FromQuery] int page,
             [FromQuery] int? perPage = null,

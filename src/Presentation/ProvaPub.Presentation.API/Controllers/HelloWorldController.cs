@@ -6,7 +6,7 @@ namespace ProvaPub.Presentation.API.Controllers
     [ApiController]
     public class HelloWorldController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("hello")]
         public ActionResult Hello() => Ok("Hello World!");
     }
 }

@@ -8,7 +8,7 @@ namespace ProvaPub.Presentation.API.Controllers
     [ApiController]
     public class RandomNumberController(IMediator mediator) : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("generate")]
         public async Task<IActionResult> Generate(CancellationToken cancellationToken = default)
         {
             var request = new GenerateRandomNumberRequest();
