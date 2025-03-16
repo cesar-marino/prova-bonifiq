@@ -15,5 +15,10 @@ namespace ProvaPub.Test.UnitTest.Commons
         public CustomerEntity MakeCustomerEntity() => new(
             customerId: Faker.Random.Guid(),
             name: Faker.Person.FullName);
+
+        public OrderEntity MakeOrderEntity() => new(
+            customerId: Faker.Random.Guid(),
+            amount: Faker.Finance.Amount(),
+            orderDate: Faker.Date.Past());
     }
 }
