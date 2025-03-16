@@ -88,5 +88,35 @@ namespace ProvaPub.Test.IntegrationTest.Application.UseCases.Customer.CanPurchas
 
             Assert.False(response);
         }
+
+        [Theory(DisplayName = nameof(ShouldReturnFalseIfItIsNotTheFirstPurchaseOfTheMonth))]
+        [Trait("Integration/UseCases", "Customer - CanPurchase")]
+        [InlineData(101)]
+        [InlineData(1000)]
+        public async Task ShouldReturnFalseIfItIsNotTheFirstPurchaseOfTheMonth(decimal amount)
+        {
+            var context = _fixture.MakeContext();
+            var customer = _fixture.MakeCustomerModel();
+            var order = _fixture.MakeOrderModel();
+
+            var trackingInfo = await context.Customers.AddAsync(customer);
+
+            await context.SaveChangesAsync();
+            trackingInfo.State = EntityState.Detached;
+
+            var customerRepository = new CustomerRepository(context);
+            var orderRepository = new OrderRepository(context);
+            var canPurchaseSpecificationFactory = new CanPurchaseSpecificationFactory();
+
+            var sut = new CanPurchaseHandler(
+                customerRepository: customerRepository,
+                orderRepository: orderRepository,
+                canPurcahaseSpecificationFactory: canPurchaseSpecificationFactory);
+
+            var request = _fixture.MakeCanPurchaseRequest(customerId: customer.CustomerId, amount: amount);
+            var response = await sut.Handle(request, _fixture.CancellationToken);
+
+            Assert.False(response);
+        }
     }
 }
