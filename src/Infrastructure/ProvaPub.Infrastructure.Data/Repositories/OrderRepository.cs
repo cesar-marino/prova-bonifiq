@@ -9,9 +9,21 @@ namespace ProvaPub.Infrastructure.Data.Repositories
 {
     public class OrderRepository(ProvaPubContext context) : IOrderRepository
     {
-        public Task<IReadOnlyList<OrderEntity>> FindAllByCustomerIdAsync(Guid customerId, CancellationToken cancellationToken = default)
+        public async Task<IReadOnlyList<OrderEntity>> FindAllByCustomerIdAsync(Guid customerId, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var models = await context.Orders
+                    .AsNoTracking()
+                    .Where(x => x.CustomerId == customerId)
+                    .ToListAsync(cancellationToken);
+
+                return (IReadOnlyList<OrderEntity>)models.Select(x => x.ToEntity());
+            }
+            catch (Exception ex)
+            {
+                throw new UnexpectedException(innerException: ex);
+            }
         }
 
         public async Task<OrderEntity> FindAsync(Guid id, CancellationToken cancellationToken = default)
