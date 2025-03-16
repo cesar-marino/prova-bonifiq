@@ -1,109 +1,96 @@
 # Prova BonifiQ Backend
-Olá!
-Essa prova foi criada para testar suas habilidades com .NET e C# em geral. 
-Por favor, siga atentamente as instruções antes de começar, ok?
+Devido à liberdade de alterações sugerida na descrição da avaliação, optei por modificar alguns aspectos e reescrever a arquitetura do projeto, visando torná-lo mais testável, escalável e alinhado com boas práticas de desenvolvimento.
 
-Não conseguiu fazer alguma etapa? Blza, entrega o que você conseguir ;)
+## Arquitetura
+Adotei uma arquitetura em camadas, seguindo os princípios da Clean Architecture, com o objetivo de separar responsabilidades e garantir a manutenibilidade do código. As camadas utilizadas são:
 
-## Para começar
-O primeiro passo é criar uma **cópia** deste repositório. Por favor, perceba que fazer uma cópia é diferente de realizar um clone ou fork. Siga os passos abaixo para fazer a cópia:
+### Domain
+A camada de domínio foi projetada para encapsular todas as regras de negócio e especificações do sistema, garantindo que não haja dependência de outras camadas ou pacotes externos. Nela:
 
-- Crie um novo repositório em sua conta do GitHub. Dê o nome de ***prova-bonifiq***
-- Abra seu client do git e siga os comandos:
-```
-git clone --bare https://github.com/bonifiq/prova-backend.git
-```
-Esse comando gera uma cópia do repositório da prova em seu computador. Agora, continue com os comandos
-```
-cd prova-backend.git
-git push --mirror https://github.com/SEUSUARIO/prova-bonifiq.git
-```
-Note que você precisa alterar o SEUUSUARIO pelo seu username do GitHub, utilizado para criar o repositório no primeiro passo.
-Você pode apagar o diretório ```prova-backend.git``` que foi criado em seu computador.
+ - Transformei os modelos em entidades, alterando a geração da chave primária para não depender do banco de dados.
 
-Tudo certo: você possui um repositório em seu nome com tudo que precisa para começar responder sua prova. Agora sim, faça o clone (git clone) em sua máquina e você está pronto para trabalhar.
-```
-git clone https://github.com/SEUSUARIO/prova-bonifiq.git
-```
+ - Utilizei Design Patterns para definir e organizar as regras de negócio, que serão detalhados nas próximas seções.
 
-> Lembre-se: NÃO gere um Fork do repositório. Siga os passos acima para copiar o repositório para sua conta.
+ - Criei exceções personalizadas para um controle mais granular dos erros da aplicação.
 
-> Importante: O código deve estar na branch main/master do seu repositório
+ - Embora as validações das entidades possam ser incluídas aqui, optei por não implementá-las devido ao tempo limitado e à ausência de casos de uso que exigissem inclusão ou alteração de dados.
 
-## Conhecendo o projeto
-> Nós recomendamos que você utilize o Visual Studio 2022 (pode ser a versão community). Você também precisa do .NET 6 instalado, ok?
-Ah, não esquece de instalar o pacote de desenvolvimento para o ASP NET durante a instalação do Visual Studio.
+### Application
+A camada de aplicação foi responsável por orquestrar as chamadas ao banco de dados e as regras de negócio definidas na camada de domínio. Aqui:
 
-Ao abrir o projeto no Visual Studio, você pode notar que se trata de um projeto Web API do ASP NET.  Você pode se orientar pela pasta ```Controllers``. 
-Dentro dela, cada Controller representa uma etapa da prova.  Logo abaixo vamos falar mais sobre essas etapas e como resolvê-las.
+ - Transformei os serviços em casos de uso, alinhando-os aos conceitos da Clean Architecture.
 
-Antes de rodar o projeto, você precisa rodar as migrations. Para isso, primeiro instale o [EF Tools](https://learn.microsoft.com/en-us/ef/core/get-started/overview/install#get-the-entity-framework-core-tools):
-```
-dotnet tool install --global dotnet-ef
-```
-Agora, pode rodar as migrations de fato:
-```
-dotnet ef database update 
-``` 
+ - Utilizei o padrão Mediator (através do pacote MediatR) para facilitar a comunicação entre a camada de apresentação e a de aplicação, promovendo o desacoplamento.
 
-Pronto, o projeto já criou as tabelas e alguns registros no seu localDB. 
+ - Adicionei Design Patterns relacionados à orquestração, que serão explicados posteriormente.
 
+### Infrastructure
+A camada de infraestrutura foi criada para isolar a comunicação com pacotes externos e frameworks, sem interferir nas regras de negócio. Nela:
 
-Rode o projeto e, se tudo deu certo, você deverá ver uma página do Swagger com as APIs que utilizaremos no teste.
+ - Centralizei toda a comunicação com o banco de dados.
 
-Dê uma passeada pelo projeto e note que ele tem alguns probleminhas de arquitetura. Vamos resolver isso já já
+ - Criei modelos de representação de dados (DTOs) para separar a lógica de persistência das entidades de domínio, garantindo que as regras de negócio permaneçam independentes.
 
+### Presentation
+A camada de apresentação contém a API responsável pela entrada e saída de dados do sistema. Aqui:
 
-## Seu trabalho
-Certo, tudo configurado e rodando. Agora vamos explicar o que você precisa fazer.
+ - Adicionei instruções para facilitar a documentação automática via Swagger.
 
+ - Implementei um filtro global para processar exceções e padronizar as respostas de erro.
+
+ - A comunicação com a camada de aplicação foi feita através do padrão Mediator, conforme mencionado anteriormente.
+
+## Correções e Melhorias
 ### Parte1Controller
-Esse controller foi criado para gerar uma API que sempre retorna um número aleatório. 
-Você pode vê-lo funcionando ao rodar o projeto e na página do Swagger, clique em Parte 1 > Try it Out > Execute.
+Para corrigir o problema da geração de números aleatórios:
 
-Esse código, no entanto, tem algum problema: ele sempre retorna o mesmo valor.
-Seu trabalho, portanto, é corrigir esse comportamente: cada vez que a chamada é realizada um número diferente deverá ser retornado.
+ - Movi a regra de negócio para a camada de domínio, na entidade RandomNumberEntity.
 
-Outro problema a ser corrigido: o número salvo no banco deve ser único. Muitas vezes uma exception é gerada quando se tenta salvar o mesmo número mais de uma vez. Faça também a correção desse problema.
+ - Adicionei uma verificação para evitar a inserção de números duplicados no banco de dados.
 
 ### Parte2Controller
-Essa API deveria retornar os produtos cadastrados de forma paginada. O usuário informa a página (page) desejada e o sistema retorna os 10 itens da mesma.
-O problema é que não importa qual número de página é utilizado: os resultados estão vindo sempre os mesmos. E não apenas os 10.
+Na correção da parte 2:
 
-Você precisa portanto:
-1. Corrigir o bug de paginação. Ao passar page=1, deveria ser retornado os 10 (0 a 9) primeiros itens do banco. Ao passar page=2 deveria ser retornado os itens subsequentes (10 a 19), etc
-2. Note que na Action do Controller, chamamos o ```ProductService```. Fazemos isso, instanciando o mesmo (```var productService = new ProductService(_ctx);```). Essa é uma prática ruim. Altere o código para que utilize Injeção de Dependência.
-3. Agora, explore os arquivos ```/Models/CustomerList``` e ```/Models/ProductList```. Eles são bem parecidos. De fato, deve haver uma forma melhor de criar esses objetos, com menos repetição de código. Faça essa alteração.
-4. Da mesma forma, como você melhoraria o ```CustomerService```e o ```ProductService``` para evitar repetição de código?
+ - Resolvi o problema de paginação na consulta ao banco de dados.
+
+ - Utilizei injeção de dependência para eliminar más práticas e melhorar a testabilidade.
+
+ - Criei classes genéricas e abstratas para padronizar a paginação e evitar repetição de código nas requisições de listagem de produtos e clientes.
 
 ### Parte3Controller
-Essa API cria o pagamento de uma compra (```PlaceOrder```). Verifique o método ```PayOrder``` da classe ```OrderService```.
-Você deve ter percebido que existem diversas formas de pagamento (Pix, cartão de crédito, paypal), certo?
-Essa classe, no entanto, é problemática. Imagine que teríamos que incluir um novo método de pagamento, seria mais um ```if```na estrutura.
+Para a parte 3:
 
-Você precisa:
-1. Faça uma alteração na arquitetura para que fique mais bem estruturado e preparado para o futuro.
-Tenha certeza que o princípio Open-Closed será respeitado.
-2. O retorno do método é um objeto `Order`, que possui um campo `OrderDate`. Tenha certeza que ao salvar o pedido no banco o campo `OrderDate` é salvo como UTC. Entretanto, o retorno do Controller deve exibir o `OrderDate` em fuso horário brasileiro (UTC-3)
+ - Adicionei a conversão da data armazenada no banco de dados (UTC) para o fuso horário UTC-3 na classe OrderResponse, utilizada como retorno da API.
+
+ - Para respeitar o princípio Open-Closed, utilizei os seguintes padrões:
+
+    - Strategy: Para definir uma interface comum aos métodos de pagamento.
+
+    - Factory: Para instanciar o método de pagamento correto com base no parâmetro fornecido pelo usuário.
+
+    - Facade: Para encapsular a lógica de pagamento, simplificando o código e facilitando a criação de testes.
+
+ - Esses padrões permitem adicionar novos métodos de pagamento de forma desacoplada: basta implementar a interface IPaymentStrategy, e o PaymentFactory reconhecerá automaticamente a nova forma de pagamento.
 
 ### Parte4Controller
-Essa API faz uma validação de negócio e retorna se o consumidor pode realizar uma compra.
-Verifique o arquivo ```CanPurchase``` da classe ```CustomerService``` e note que ele aplica diversas regras de negócio.
+Para cumprir essa parte do desafio:
 
-Seu trabalho aqui será:
-1. Crie testes unitários para este método. Tente obter o máximo de cobertura possível. Se precisar, pode rearquitetar o código para facilitar nos testes.
+ - Reestruturei a arquitetura e utilizei os seguintes padrões:
 
-Você pode utilizar qualquer framework de testes que desejar. 
+    - Specification: Para isolar cada regra de negócio em uma classe específica.
 
-### Dicas
-- Você pode alterar qualquer parte do código ou de sua arquitetura como julgar melhor.
-- Valorizamos arquitetura e aplicação correta de Design Patterns (fica à vontade para “over engineering” na sua demonstração);
+    - Composite: Para agrupar as regras de negócio relacionadas à verificação de compra.
 
-## Como entregar
-Oba! Terminou tudinho? Agora faça o seguinte:
-1. Faça ```push``` para seu repositório (sim, aquele que você criou lá em cima. Nada de fork).
-2. Forneça acesso ao repositório no GitHub para o usuário ```sandercamargo```
-2. Preencha o formulário abaixo:
-[https://forms.gle/mHipmDJJnij7FRHE7](https://forms.gle/mHipmDJJnij7FRHE7)
+    - Factory: Para facilitar a criação da composição das regras.
 
-A gente te responde em breve, ok?
+ - Esses padrões permitiram separar as regras de negócio, facilitar os testes e criar uma estrutura flexível para adicionar novas regras no futuro.
+
+### Testes
+Adotei o padrão TDD (Test-Driven Development) durante o desenvolvimento, criando testes unitários para a maior parte do projeto. Além disso implementei alguns testes de integração para validar a comunicação entre o banco de dados e os casos de uso.
+
+## Conclusão
+Desenvolvi o projeto aplicando as melhores práticas que conheço, buscando torná-lo desacoplado, testável e escalável. Embora algumas melhorias adicionais possam ser implementadas, optei por priorizar a entrega dentro do prazo estipulado.
+
+Agradeço pela oportunidade e fico à disposição para qualquer esclarecimento adicional. Espero que gostem do resultado!
+
+Muito obrigado!
