@@ -1,9 +1,8 @@
-﻿
-using ProvaPub.Application.Factories;
+﻿using ProvaPub.Application.Factories;
 using ProvaPub.Domain.Entities;
 using ProvaPub.Domain.Repositories;
 
-namespace ProvaPub.Application.UseCases.Order.CanPurchase
+namespace ProvaPub.Application.UseCases.Customer.CanPurchase
 {
     public class CanPurchaseHandler(
         ICustomerRepository customerRepository,

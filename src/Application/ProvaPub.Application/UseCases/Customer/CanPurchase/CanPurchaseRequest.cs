@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace ProvaPub.Application.UseCases.Order.CanPurchase
+namespace ProvaPub.Application.UseCases.Customer.CanPurchase
 {
     public class CanPurchaseRequest(Guid customerId, decimal amount) : IRequest<bool>
     {

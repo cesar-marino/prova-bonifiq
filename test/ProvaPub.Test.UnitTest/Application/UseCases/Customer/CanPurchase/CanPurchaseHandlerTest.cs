@@ -1,12 +1,12 @@
 ﻿using Moq;
 using ProvaPub.Application.Factories;
-using ProvaPub.Application.UseCases.Order.CanPurchase;
+using ProvaPub.Application.UseCases.Customer.CanPurchase;
 using ProvaPub.Domain.Entities;
 using ProvaPub.Domain.Exceptions;
 using ProvaPub.Domain.Repositories;
 using ProvaPub.Domain.Specifications;
 
-namespace ProvaPub.Test.UnitTest.Application.UseCases.Order.CanPurchase
+namespace ProvaPub.Test.UnitTest.Application.UseCases.Customer.CanPurchase
 {
     public class CanPurchaseHandlerTest : IClassFixture<CanPurchaseHandlerTestFixture>
     {

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace ProvaPub.Application.UseCases.Order.CanPurchase
+namespace ProvaPub.Application.UseCases.Customer.CanPurchase
 {
     public interface ICanPurchaseHandler : IRequestHandler<CanPurchaseRequest, bool>
     {
