@@ -3,7 +3,7 @@ using ProvaPub.Domain.Specifications;
 
 namespace ProvaPub.Application.Factories
 {
-    public class CanPurchaseSpecificationFactory
+    public class CanPurchaseSpecificationFactory : ICanPurchaseSpecificationFactory
     {
         public CompositeSpecification<OrderEntity> CreateOrderSpecification(IReadOnlyList<OrderEntity> orders)
         {
